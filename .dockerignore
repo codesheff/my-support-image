@@ -1,0 +1,21 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+
+# Logs
+*.log
+
+# Temporary files
+.DS_Store
+.vscode/
+*.swp
+*.swo
+*~
