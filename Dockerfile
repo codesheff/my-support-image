@@ -1,5 +1,5 @@
 # Use a stable base image
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     # Network utilities
     net-tools \
-    netcat \
+    netcat-openbsd \
     telnet \
     # Security
     openssl \
