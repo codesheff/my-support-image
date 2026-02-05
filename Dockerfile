@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
     # Python
     python3 \
     python3-pip \
+    python3-venv \
     # Network utilities
     net-tools \
     netcat-openbsd \
@@ -62,6 +63,16 @@ RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dea
 
 # Install Helm using the official installation script
 RUN curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Install Python dependencies
+COPY requirements.txt /tmp/requirements.txt
+RUN python3 -m venv /opt/venv \
+    && /opt/venv/bin/pip install --no-cache-dir --upgrade pip \
+    && /opt/venv/bin/pip install --no-cache-dir -r /tmp/requirements.txt \
+    && rm -f /tmp/requirements.txt
+
+# Ensure venv is used by default
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Create a non-root user
 RUN useradd -m -s /bin/bash -G sudo user \
